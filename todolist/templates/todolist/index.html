@@ -1,0 +1,38 @@
+<body>
+    <h1> Mi listado de tareas</h1>
+    <form method="POST" action="addTask">
+        {% csrf_token %}
+        <label for="task">Agregar tarea:</label>
+        <input type="text" name="task" />
+        <input type="submit" value="Submit" />
+    </form>
+    <h3>Tareas</h3>
+    {% if todo_list %}
+    <table>
+        <thead>
+            <tr>
+                <th>Tarea</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <form action="deleteTask" method="POST">
+                {% csrf_token %} {% for task in todo_list %}
+                <tr>
+                    <td>{{task.name}}</td>
+                    <td>
+                        <a href="{% url 'deleteTask' task.id %}">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </form>
+        </tbody>
+
+    </table>
+    {% else %}
+    <h4>No existen tareas :)</h4>
+    
+    {% endif %}
+    <h4> *Desarrollado por team Flash Gordon*</label>
+</body>

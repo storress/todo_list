@@ -18,21 +18,10 @@ class Task(models.Model):
     def isDone(self):
         return self.done
     
-    def edit(self, name=None):
-        if name is None:
-            return False
+    def edit(self, name="Default task"):
+        sel
+        self.name = name
+        self.save()
         
-        if not Task.verifyDuplicate(name):
-            self.name = name
-            self.save()
-            return True
-            
-        return False
         
-    @staticmethod
-    def verifyDuplicate(task_name):
-        tasks = Task.objects.filter(name = task_name, done = False)
-        if tasks:
-            return True
-        return False
-        
+        return True

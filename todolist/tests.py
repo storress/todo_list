@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.test import TestCase
-from models import *
+from todolist.models import *
 import pdb
 # Create your tests here.
 

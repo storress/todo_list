@@ -129,3 +129,12 @@ class TestBlank(TestCase):
         tasks = Task.objects.all()
         # assert
         self.assertEqual(len(tasks), 0)
+        
+    def testAddSpacesTask(self):
+        # arrange
+        spaces_task = Task(name='         ')
+        # act
+        spaces_task.save()
+        tasks = Task.objects.all()
+        # assert
+        self.assertEqual(len(tasks), 0)

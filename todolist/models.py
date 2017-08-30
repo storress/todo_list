@@ -30,7 +30,9 @@ class Task(models.Model):
         return False
     
     def save(self, *args, **kwargs):
-        if self.name != '':
+        """ Checks whether a task is empty of just spaces and avoids saving that 
+        task """
+        if self.name != '' and not self.name.isspace():
             return super(Task,self).save(*args, **kwargs)
         
 

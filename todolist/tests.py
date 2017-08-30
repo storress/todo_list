@@ -118,3 +118,14 @@ class TestEditTask(TestCase):
         #assert
         self.assertEquals(task.name, task3_name)
         self.assertEquals(status_edit_done, True)
+        
+class TestBlank(TestCase):
+    
+    def testAddEmptyTask(self):
+        # arrange
+        empty_task = Task(name='')
+        # act
+        empty_task.save()
+        tasks = Task.objects.all()
+        # assert
+        self.assertEqual(len(tasks), 0)

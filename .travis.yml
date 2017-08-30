@@ -1,8 +1,9 @@
 languaje: python
-
 python:
-  - "3.4"
-
-install: "pip install -r requirements.txt"
-
+- '3.4'
+install: pip install -r requirements.txt
 script: python manage.py test
+deploy:
+  provider: heroku
+  api_key:
+    secure: VJ8qNXf3C9QDnaepWhGOai6PqXngcb9XAKrt43wENEac1qgwdD0Gt6DefRksGEJC0qRZRELCPZLln6NqwStp6emXVsE6udtlPEzOk5hD14ancdSjxEvvyWNaPh1BQ+2NzTE51ujQ287D23fNrYSreO002DjpIJwWPeoH0c43HfppGl09HEfAvStaX9dW3JxLVUWmd0paPCoGMiBzfUuJJQOmWtq7Xtnpmqz1KaU/eyRXX5GlmsS5OvajX23kmfRzD48LJqwwSpzUl/hXLnTlo2dCiYbN+pyezxctyVXzF6ZgvMW7Xle0YuQrrfum2St4sZkz0nKHg2x3t0shgNAW3fP5jfczVGc1uxC5H2M3hudKn6NpkvSHYnkwsN7S0LQTdbyzGi0Xil2YbUaCf5WxYDBThQzZsjvcxrglwHQb1louDadoA1aTBfKzDpyaZ0ckSfR6xFgXZLxQ2q3ISIzbRvYWZExlpw5ILdEt/tIndYJoWCetZLVXkrm9lqsx82Qr2F4KDopyHsR+xiPUT6UfGRUQq2xdnkLRqNxndLzy3vp1GfH6aLWNZOmvOPpUqh9KfabdgYsF4d4v6eQKTBcmxhwfdtoDfXxEN5ewHsAEz/kyGBgTAFdUsOyfTi6hv6HBbLKCVQx2kGKh0fgsoIgAnxXUFjti8eSSXkALevOjfME=

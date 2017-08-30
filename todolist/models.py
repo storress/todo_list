@@ -8,7 +8,7 @@ from django.db import models
 # se define el modelo para una Task
 # basta con esto para que se genere un listado con tasks
 class Task(models.Model):
-    name = models.CharField(max_length = 100, blank = False, null = False)
+    name = models.CharField(max_length = 100, null = False)
     done = models.BooleanField(default = False)
     
     def complete(self):
@@ -28,6 +28,12 @@ class Task(models.Model):
             return True
             
         return False
+    
+    def save(self):
+        if self.name != '':
+            return super(Task,self).save()
+        
+
         
     @staticmethod
     def verifyDuplicate(task_name):

@@ -25,7 +25,8 @@ SECRET_KEY = '+4^xazmk^vqkp7f5@p_oop1e%lnw(lqs05!olpitnn$90+3rb2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://todolistagil.herokuapp.com/']
+ALLOWED_HOSTS = ['https://todolistagil.herokuapp.com/', 
+                 'todo-list-storress.c9users.io']
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 

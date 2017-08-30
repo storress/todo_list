@@ -29,9 +29,9 @@ class Task(models.Model):
             
         return False
     
-    def save(self):
+    def save(self, *args, **kwargs):
         if self.name != '':
-            return super(Task,self).save()
+            return super(Task,self).save(*args, **kwargs)
         
 
         

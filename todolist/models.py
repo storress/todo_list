@@ -30,9 +30,10 @@ class Task(models.Model):
         return False
     
     def save(self, *args, **kwargs):
-        """ Checks whether a task is empty of just spaces and avoids saving that 
+        """ Checks whether a task is duplicated or empty of just spaces and avoids saving that 
         task """
-        if self.name != '' and not self.name.isspace():
+        duplicated = Task.verifyDuplicate(self.name)
+        if self.name != '' and not self.name.isspace() and not duplicated:
             return super(Task,self).save(*args, **kwargs)
         
 

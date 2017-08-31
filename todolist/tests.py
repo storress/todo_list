@@ -138,3 +138,27 @@ class TestBlank(TestCase):
         tasks = Task.objects.all()
         # assert
         self.assertEqual(len(tasks), 0)
+        
+class TestPreventDuplicatedPendingTask(TestCase):
+    
+    def testSavedDuplicatedTask(self):
+        # arrange
+        task_name = "Base"
+        base_task = Task(name = task_name)
+        duplicated_task = Task(name = task_name)
+        
+        tasks_len0 = len(Task.objects.all())
+        
+        # act
+        base_task.save()
+        tasks_len1 = len(Task.objects.all())
+        
+        duplicated_task.save()
+        tasks_len2 = len(Task.objects.all())
+        
+        #assert
+        self.assertNotEqual(tasks_len0, tasks_len1)
+        self.assertNotEqual(tasks_len0, tasks_len2)
+        self.assertEqual(tasks_len1, tasks_len2)
+        
+        

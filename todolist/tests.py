@@ -160,5 +160,5 @@ class TestPreventDuplicatedPendingTask(TestCase):
         self.assertNotEqual(tasks_len0, tasks_len1)
         self.assertNotEqual(tasks_len0, tasks_len2)
         self.assertEqual(tasks_len1, tasks_len2)
-        
+        self.asssertEquals(True, False)
         

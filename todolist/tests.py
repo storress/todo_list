@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.test import TestCase
 from todolist.models import *
+from django.db import DataError
 import pdb
 # Create your tests here.
 
@@ -161,3 +162,16 @@ class TestPreventDuplicatedPendingTask(TestCase):
         self.assertNotEqual(tasks_len0, tasks_len2)
         self.assertEqual(tasks_len1, tasks_len2)
         
+class TestBugAddLongTask(TestCase):
+    
+    def testAddLongTask(self):
+        #arrange
+        task_name = "Largooooooo"*11
+        
+
+        #act
+        new_task = Task(name = task_name)
+        
+        #assert
+        with self.assertRaises(DataError):
+            new_task.save()

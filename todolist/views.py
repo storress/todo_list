@@ -18,17 +18,8 @@ def index(request):
 #vista que recibe la task a agregar y la guarda en la base de datos
 #redirecciona hacia index ya que no tiene un template definido
 def addTask(request):
-    task_name = request.POST.get('task')
-    duplicated = Task.verifyDuplicate(task_name)
-    #pdb.set_trace()
-    if(not duplicated):
-        Task(name = task_name).save()
-    todo_list = Task.objects.filter(done = False)
-    completed_tasks = Task.objects.filter(done = True)
-    # Se agregaron las variables add_status y task_name, que corresponden al estado de si se agrego o no (lo cual depende de si la 
-    # tarea esta duplicada o no) ademas del nombre de la tarea, en caso de que este duplicada, para darle la informacion al usuario.
-    context = { "todo_list": todo_list, "completed_tasks": completed_tasks, "add_status" : not duplicated, "task_name" : task_name}
-    return render(request, "todolist/index.html", context)
+    Task(name = request.POST.get('task')).save()
+    return redirect('index')
     
     
 def deleteTask(request, task_id):

@@ -26,7 +26,9 @@ SECRET_KEY = '+4^xazmk^vqkp7f5@p_oop1e%lnw(lqs05!olpitnn$90+3rb2'
 DEBUG = True
 
 ALLOWED_HOSTS = ['todolistagil.herokuapp.com',
-                 'todo-list-storress.c9users.io']
+                 'todo-list-storress.c9users.io',
+                 'localhost',
+                 '127.0.0.1:8000']
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 

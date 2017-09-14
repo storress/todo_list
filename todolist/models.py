@@ -33,11 +33,12 @@ class Task(models.Model):
     
     def save(self, *args, **kwargs):
         """ Checks whether a task is duplicated or empty of just spaces and avoids saving that 
-        task """
+        task
+        Also, if there is a ValidationError, then it does not save and it returns None"""
         try:
             self.full_clean()
         except ValidationError:
-            return
+            return 
         duplicated = Task.verifyDuplicate(self.name)
         if self.name != '' and not self.name.isspace() and not duplicated:
             return super(Task,self).save(*args, **kwargs)

@@ -47,4 +47,9 @@ def editTask(request):
     task_id = request.POST.get('task_id')
     # pdb.set_trace()
     status = Task.objects.all().filter(id = task_id)[0].edit(new_name)  # Si explota, es aqui
+    if(not status):
+        todo_list = Task.objects.filter(done = False)
+        completed_tasks = Task.objects.filter(done = True)
+        context = { "todo_list": todo_list, "completed_tasks": completed_tasks, "edit_status" : status, "task_name" : new_name}
+        return render(request, "todolist/index.html", context)
     return redirect("index")

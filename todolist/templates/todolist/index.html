@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <div class="row">
-            <h1> Mi listado de tareas - Error</h1>
+            <h1> Mi listado de tareas</h1>
         </div>
         <hr>
         <div class="row">
@@ -125,6 +125,12 @@
     {% if add_status is not None and not add_status %}
     <script>
         alert("Tarea ya existente: '{{task_name}}'")
+    </script>
+    {% endif %}
+    </script>
+    {% if edit_status is not None and not edit_status %}
+    <script>
+        alert("Tarea no se puede editar: '{{task_name}}'")
     </script>
     {% endif %}
 </body>

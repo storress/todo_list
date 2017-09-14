@@ -1,7 +1,5 @@
 languaje: python
 python:
 - '3.5'
-install: 
-- sudo pip install urllib3[secure]
-- sudo pip install -r requirements.txt
+install: pip install -r requirements.txt
 script: python manage.py test

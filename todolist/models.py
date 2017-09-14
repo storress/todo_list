@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-
+from django.core.exceptions import ValidationError
 from django.db import models
 
 # Create your models here.
@@ -24,17 +24,24 @@ class Task(models.Model):
         
         if not Task.verifyDuplicate(name):
             self.name = name
-            self.save()
-            return True
-            
+            try:
+                self.save()
+                return True
+            except ValidationError:
+                return False
         return False
     
     def save(self, *args, **kwargs):
         """ Checks whether a task is duplicated or empty of just spaces and avoids saving that 
         task """
+        try:
+            self.full_clean()
+        except ValidationError:
+            return
         duplicated = Task.verifyDuplicate(self.name)
         if self.name != '' and not self.name.isspace() and not duplicated:
             return super(Task,self).save(*args, **kwargs)
+        return
         
 
         

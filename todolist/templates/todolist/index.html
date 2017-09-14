@@ -17,7 +17,7 @@
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="task">Agregar tarea:</label>
-                    <input class="form-control" type="text" name="task" />
+                    <input class="form-control" type="text" name="task" maxlength="100"/>
                 </div>
                 <input class="btn btn-primary" type="submit" value="Submit" />
             </form>

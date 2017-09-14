@@ -17,7 +17,7 @@
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="task">Agregar tarea:</label>
-                    <input class="form-control" type="text" name="task" />
+                    <input class="form-control" type="text" name="task" maxlength="100"/>
                 </div>
                 <input class="btn btn-primary" type="submit" value="Submit" />
             </form>
@@ -93,7 +93,7 @@
             </div>
 
         </div>
-        <form method="POST" action="editTask" id="editForm">
+        <form method="POST" action="editTask" id="editForm" hidden>
             {% csrf_token %}
             <input type="hidden" name="task_id" id="task_id" />
             <input type="text" name="new_name" />
@@ -106,7 +106,6 @@
     <script type="text/javascript">
         $(document).ready(function() {
             var form = $("#editForm");
-            form.hide();
             $(".editButton").click(function() {
                 $("td > button").show();
                 $(this).hide();
@@ -123,6 +122,17 @@
             });
         });
     </script>
+    {% if add_status is not None and not add_status %}
+    <script>
+        alert("Tarea ya existente: '{{task_name}}'")
+    </script>
+    {% endif %}
+    </script>
+    {% if edit_status is not None and not edit_status %}
+    <script>
+        alert("Tarea no se puede editar: '{{task_name}}'")
+    </script>
+    {% endif %}
 </body>
 
 </html>

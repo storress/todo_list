@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.test import TestCase
 from todolist.models import *
+from django.core.exceptions import ValidationError
 import pdb
 # Create your tests here.
 
@@ -118,3 +119,71 @@ class TestEditTask(TestCase):
         #assert
         self.assertEquals(task.name, task3_name)
         self.assertEquals(status_edit_done, True)
+        
+class TestBlank(TestCase):
+    
+    def testAddEmptyTask(self):
+        # arrange
+        empty_task = Task(name='')
+        # act
+        try:
+            empty_task.save()
+        except Exception:
+            pass
+        tasks = Task.objects.all()
+        # assert
+        self.assertEqual(len(tasks), 0)
+        
+    def testAddSpacesTask(self):
+        # arrange
+        spaces_task = Task(name='         ')
+        # act
+        spaces_task.save()
+        tasks = Task.objects.all()
+        # assert
+        self.assertEqual(len(tasks), 0)
+        
+class TestPreventDuplicatedPendingTask(TestCase):
+    
+    def testSavedDuplicatedTask(self):
+        # arrange
+        task_name = "Base"
+        base_task = Task(name = task_name)
+        duplicated_task = Task(name = task_name)
+        
+        tasks_len0 = len(Task.objects.all())
+        
+        # act
+        base_task.save()
+        tasks_len1 = len(Task.objects.all())
+        
+        duplicated_task.save()
+        tasks_len2 = len(Task.objects.all())
+        
+        #assert
+        self.assertNotEqual(tasks_len0, tasks_len1)
+        self.assertNotEqual(tasks_len0, tasks_len2)
+        self.assertEqual(tasks_len1, tasks_len2)
+        
+class TestBugAddLongTask(TestCase):
+    
+    def testAddLongTask(self):
+        #arrange
+        task_name = "Largooooooo"*1000
+        
+
+        #act
+        new_task = Task(name = task_name)
+        
+        #assert
+        
+        with self.assertRaises(ValidationError):
+            new_task.full_clean()
+            new_task.save()
+        #self.assertTrue(True)
+        
+        '''Este test falla dado que la base de datos Sqlite es muy flexible
+        con respecto a las constraints, lo que no es el caso para PostgreSQL
+        que es una base de datos real que no es flexible con los constraints'''
+        
+        '''Se logro pasar el test, cambiando el tipo de error'''
